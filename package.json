@@ -1,0 +1,52 @@
+{
+  "version": "1.0.0",
+  "name": "The last of Guss",
+  "packageManager": "yarn@4.6.0",
+  "description": "The last of Guss",
+  "main": "index.js",
+  "scripts": {
+    "client:dev": "yarn workspace client dev",
+    "client:build": "yarn workspace client build",
+    "client:start": "yarn workspace client start",
+    "server:dev": "yarn workspace server dev",
+    "server:build": "yarn workspace server build",
+    "server:start": "yarn workspace server start",
+    "lint": "eslint",
+    "lint:fix": "yarn lint --fix",
+    "lint:all": "eslint \"apps/**/*.{ts,tsx,jsx,js}\" --quiet",
+    "db:build": "docker compose build db",
+    "db:up": "docker compose up db -d",
+    "db:down": "docker compose down db",
+    "db:migrate": "npx kysely-ctl migrate",
+    "db:rollback": "npx kysely-ctl rollback",
+    "db:seed": "npx kysely-ctl seed"
+  },
+  "type": "module",
+  "author": "Gadzhiev Islam",
+  "email": "gadzhievislam20@gmail.com",
+  "license": "MIT",
+  "workspaces": [
+    "apps/server",
+    "apps/client"
+  ],
+  "resolutions": {
+    "vite-node/vite": "^4.5.0",
+    "react-router": "7.9.1"
+  },
+  "dependencies": {
+    "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.1",
+    "@typescript-eslint/eslint-plugin": "^8.32.0",
+    "@typescript-eslint/parser": "^8.32.0",
+    "eslint": "^9.26.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-promise": "^7.2.1",
+    "ts-node": "^10.9.2",
+    "tsc-alias": "^1.8.16",
+    "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.19.3",
+    "typescript-eslint": "^8.32.0"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "allowSyntheticDefaultImports": true,
+    "module": "ESNext",
+    "target": "ES2022",
+    "esModuleInterop": true,
+    "moduleResolution": "Node",
+    "noEmit": false,
+    "outDir": "./dist",
+    "rootDir": "../../",
+    "paths": {
+      "@db": ["./db/connection.ts"],
+      "@fastify-types": ["./@types/fastify/index.d.ts"],
+      "@lib/*": ["./lib/*"],
+      "@domain/*": ["./domain/*"],
+      "@plugins/*": ["./plugins/*"],
+      "@shared/*": ["../../shared/*"],
+      "@api/*": ["../../shared/api/*"],
+      "~/*": ["./*"],
+      "@root/*": ["../../*"]
+    }
+  },
+  "include": [
+    "./**/*",
+    "**/*.ts",
+    "**/*.json",
+    "../../shared/**/*.json",
+    "../../shared/**/*.ts",
+    "../../shared/**/*.js",
+    "../../system.js",
+    "../../.env",
+    "../../global.d.ts",
+    "../../kysely.config.ts"
+  ]
+}

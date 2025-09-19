@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 import type { FastifyInstance } from 'fastify';
 import swagger from '@fastify/swagger';
@@ -31,7 +31,7 @@ export default fp(async function (fastify: FastifyInstance) {
             scheme: 'bearer',
             bearerFormat: 'JWT',
             name: 'Bearer <accessToken>',
-            in: "header",
+            in: 'header',
           },
         },
       },

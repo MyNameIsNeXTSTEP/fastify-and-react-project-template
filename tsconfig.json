@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "rootDir": ".",
+    "baseUrl": ".",
+    "outDir": "./dist",
+    "lib": ["ES2022"],
+    "module": "ESNext",
+    "target": "ESNext",
+    "composite": true,
+    "skipLibCheck": true,
+    "allowJs": true,
+    "noEmit": true,
+    "incremental": true,
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitAny": true,
+    "strictBindCallApply": true,
+    "strictFunctionTypes": true,
+    "strictPropertyInitialization": true,
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "paths": {
+      "@root/*": ["./*"],
+      "@shared/*": ["./shared/*"],
+      "@api/*": ["./shared/api/*"]
+    }
+  },
+  "include": [
+    "./apps/**/*",
+    "./shared/**/*",
+    "global.d.ts",
+    "apps/client/.react-router"
+  ],
+  "exclude": [".pnp.*"],
+}

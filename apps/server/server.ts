@@ -1,0 +1,113 @@
+'use strict';
+
+import Fastify, { type FastifyInstance } from 'fastify';
+import autoload from '@fastify/autoload';
+import fastifyFormbody from '@fastify/formbody';
+import fastifyCors from '@fastify/cors';
+import fastifyWebsocket from '@fastify/websocket';
+import wsApiPlugin from 'fastify-wsapi-plugin';
+import { __dirname } from '../../system.js';
+
+const { wsRegistry, wsSchemaValidator } = wsApiPlugin;
+/**
+ * @todo
+ * Domain modules
+ */
+// import session from '@domain/Session/index.js';
+// import account from '@domain/Account/index.js';
+// import { registerRoutes } from './routes/index.js';
+import * as path from 'path';
+import fastifyCookie from '@fastify/cookie';
+import { config } from 'dotenv';
+
+config({ path: path.join(__dirname, '.env') });
+const port = Number(process.env.SERVER_PORT) || 3000;
+
+const buildServer = async (): Promise<FastifyInstance> => {
+  const fastify = Fastify({
+    logger: {
+      transport: {
+        target: 'pino-pretty',
+        options: {
+          colorize: true,
+          translateTime: 'HH:MM:ss Z',
+          ignore: 'pid,hostname',
+        },
+      },
+    },
+    disableRequestLogging: process.env.DISABLE_REQUEST_LOGGING === 'true',
+    ajv: {
+      customOptions: {
+        removeAdditional: false,
+        useDefaults: true,
+        coerceTypes: true,
+        allErrors: true,
+      },
+    },
+  });
+
+  /**
+   * @Note
+   * Логирует пока только ошибки (использовать для дева, в проде логировать все запросы http и ws, кроме медиа)
+   */
+  if (process.env.LOG_ONLY_ERRORS === 'true') {
+    fastify.addHook('onError', async (request, reply, error) => {
+      request.log.error({
+        method: request.method,
+        url: request.url,
+        statusCode: reply.statusCode,
+        headers: request.headers,
+        error, 
+      }, 'request error occurred');
+    });
+  }
+
+  await fastify.register(autoload, {
+    dir: path.join(__dirname, '/apps/server/plugins'),
+  });
+  await fastify.register(fastifyFormbody);
+  await fastify.register(wsRegistry);
+  await fastify.register(wsSchemaValidator);
+  await fastify.register(fastifyWebsocket);
+  await fastify.register(fastifyCors);
+  /**
+   * @todo
+   * Register routes
+   */
+  // fastify.register(registerRoutes, {
+  //   prefix: '/api',
+  // });
+  await fastify.register(fastifyCookie as any, {
+    secret: 'a-secret-for-signing-cookies',
+    hook: 'onRequest',
+  });
+  // fastify.decorate('db', db);
+  // fastify.decorate('session', session);
+  // fastify.decorate('account', account);
+  return fastify as FastifyInstance;
+};
+
+const startServer = async () => {
+  const server = await buildServer();
+  try {
+    await server.listen({
+      port,
+      host: '0.0.0.0',
+    });
+    process.on('SIGINT', async () => {
+      console.warn('\nClosing the server by a SIGINT\n');
+      await server.close();
+      process.exit(0);
+    });
+    process.on('SIGTERM', async () => {
+      console.warn('\nClosing the server by a SIGTERM\n');
+      await server.close();
+      process.exit(1);
+    });
+  } catch (err) {
+    server.log.error(err);
+    process.exit(1);
+  }
+};
+
+startServer();

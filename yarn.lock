@@ -7033,6 +7033,7 @@ __metadata:
     esbuild: "npm:^0.25.2"
     fastify: "npm:^5.2.2"
     fastify-cli: "npm:^7.3.0"
+    fastify-plugin: "npm:^5.0.0"
     fastify-wsapi-plugin: "npm:^0.1.10"
     pg: "npm:^8.16.0"
     pino-pretty: "npm:^13.0.0"

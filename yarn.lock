@@ -2349,55 +2349,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"app@workspace:apps/client":
-  version: 0.0.0-use.local
-  resolution: "app@workspace:apps/client"
-  dependencies:
-    "@mantine/core": "npm:^8.0.2"
-    "@mantine/dates": "npm:^8.0.0"
-    "@mantine/form": "npm:^7.17.7"
-    "@mantine/hooks": "npm:^8.0.2"
-    "@mantine/modals": "npm:^8.2.8"
-    "@mantine/notifications": "npm:^8.0.2"
-    "@react-router/dev": "npm:^7.9.1"
-    "@react-router/node": "npm:^7.9.1"
-    "@react-router/serve": "npm:^7.9.1"
-    "@stylistic/eslint-plugin-js": "npm:^4.2.0"
-    "@tabler/icons-react": "npm:^3.31.0"
-    "@tailwindcss/vite": "npm:^4.1.4"
-    "@types/lodash": "npm:^4"
-    "@types/node": "npm:^20"
-    "@types/react": "npm:^19.1.2"
-    "@types/react-dom": "npm:^19.1.2"
-    "@types/react-router": "npm:^5.1.20"
-    "@types/react-router-dom": "npm:^5.3.3"
-    "@types/react-transition-group": "npm:^4"
-    dayjs: "npm:^1.11.18"
-    eslint: "npm:^9.26.0"
-    eslint-plugin-react-hooks: "npm:^5.2.0"
-    eslint-plugin-react-refresh: "npm:^0.4.20"
-    isbot: "npm:^5.1.27"
-    lodash: "npm:^4.17.21"
-    mobx: "npm:^6.13.7"
-    mobx-persist-store: "npm:^1.1.8"
-    mobx-react: "npm:^9.2.0"
-    mobx-state-tree: "npm:^7.0.2"
-    mst-middlewares: "npm:^6.1.0"
-    postcss: "npm:^8.5.3"
-    postcss-preset-mantine: "npm:^1.17.0"
-    postcss-simple-vars: "npm:^7.0.1"
-    react: "npm:^19.1.0"
-    react-dom: "npm:^19.1.0"
-    react-router: "npm:^7.9.1"
-    react-router-dom: "npm:^7.9.1"
-    react-transition-group: "npm:^4.4.5"
-    tailwindcss: "npm:^4.1.4"
-    typescript: "npm:^5.8.3"
-    vite: "npm:^6.3.3"
-    vite-tsconfig-paths: "npm:^5.1.4"
-  languageName: unknown
-  linkType: soft
-
 "arg@npm:^4.1.0":
   version: 4.1.3
   resolution: "arg@npm:4.1.3"
@@ -2817,6 +2768,55 @@ __metadata:
   checksum: 10c0/43925b87700f7e3893296c8e9c56cc58f926411cce3a6e5898136daaf08f08b9a8eb76d37d3267e707d0dcc17aed2e2ebdf5848c0c3ce95cf910a919935c1b10
   languageName: node
   linkType: hard
+
+"client@workspace:apps/client":
+  version: 0.0.0-use.local
+  resolution: "client@workspace:apps/client"
+  dependencies:
+    "@mantine/core": "npm:^8.0.2"
+    "@mantine/dates": "npm:^8.0.0"
+    "@mantine/form": "npm:^7.17.7"
+    "@mantine/hooks": "npm:^8.0.2"
+    "@mantine/modals": "npm:^8.2.8"
+    "@mantine/notifications": "npm:^8.0.2"
+    "@react-router/dev": "npm:^7.9.1"
+    "@react-router/node": "npm:^7.9.1"
+    "@react-router/serve": "npm:^7.9.1"
+    "@stylistic/eslint-plugin-js": "npm:^4.2.0"
+    "@tabler/icons-react": "npm:^3.31.0"
+    "@tailwindcss/vite": "npm:^4.1.4"
+    "@types/lodash": "npm:^4"
+    "@types/node": "npm:^20"
+    "@types/react": "npm:^19.1.2"
+    "@types/react-dom": "npm:^19.1.2"
+    "@types/react-router": "npm:^5.1.20"
+    "@types/react-router-dom": "npm:^5.3.3"
+    "@types/react-transition-group": "npm:^4"
+    dayjs: "npm:^1.11.18"
+    eslint: "npm:^9.26.0"
+    eslint-plugin-react-hooks: "npm:^5.2.0"
+    eslint-plugin-react-refresh: "npm:^0.4.20"
+    isbot: "npm:^5.1.27"
+    lodash: "npm:^4.17.21"
+    mobx: "npm:^6.13.7"
+    mobx-persist-store: "npm:^1.1.8"
+    mobx-react: "npm:^9.2.0"
+    mobx-state-tree: "npm:^7.0.2"
+    mst-middlewares: "npm:^6.1.0"
+    postcss: "npm:^8.5.3"
+    postcss-preset-mantine: "npm:^1.17.0"
+    postcss-simple-vars: "npm:^7.0.1"
+    react: "npm:^19.1.0"
+    react-dom: "npm:^19.1.0"
+    react-router: "npm:^7.9.1"
+    react-router-dom: "npm:^7.9.1"
+    react-transition-group: "npm:^4.4.5"
+    tailwindcss: "npm:^4.1.4"
+    typescript: "npm:^5.8.3"
+    vite: "npm:^6.3.3"
+    vite-tsconfig-paths: "npm:^5.1.4"
+  languageName: unknown
+  linkType: soft
 
 "close-with-grace@npm:^2.1.0":
   version: 2.2.0

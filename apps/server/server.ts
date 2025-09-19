@@ -19,6 +19,7 @@ const { wsRegistry, wsSchemaValidator } = wsApiPlugin;
 import * as path from 'path';
 import fastifyCookie from '@fastify/cookie';
 import { config } from 'dotenv';
+import { connectDB, closeDB } from './db/connection.js';
 
 config({ path: path.join(__dirname, '.env') });
 const port = Number(process.env.SERVER_PORT) || 3000;
@@ -45,6 +46,14 @@ const buildServer = async (): Promise<FastifyInstance> => {
       },
     },
   });
+
+  try {
+    await connectDB();
+    fastify.log.info('Server: Database connected successfully');
+  } catch (error: any) {
+    fastify.log.error('Server: Failed to connect to database:', error);
+    throw error;
+  }
 
   /**
    * @Note
@@ -96,11 +105,13 @@ const startServer = async () => {
     });
     process.on('SIGINT', async () => {
       console.warn('\nClosing the server by a SIGINT\n');
+      await closeDB();
       await server.close();
       process.exit(0);
     });
     process.on('SIGTERM', async () => {
       console.warn('\nClosing the server by a SIGTERM\n');
+      await closeDB();
       await server.close();
       process.exit(1);
     });

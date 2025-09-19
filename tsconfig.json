@@ -21,6 +21,7 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "isolatedModules": true,
+    "experimentalDecorators": true,
     "paths": {
       "@root/*": ["./*"],
       "@shared/*": ["./shared/*"],

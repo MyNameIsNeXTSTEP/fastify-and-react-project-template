@@ -5,7 +5,10 @@ import autoload from '@fastify/autoload';
 import fastifyFormbody from '@fastify/formbody';
 import fastifyCors from '@fastify/cors';
 import fastifyWebsocket from '@fastify/websocket';
-import { wsRegistry, wsSchemaValidator } from 'fastify-wsapi-plugin';
+import wsApiPlugin from 'fastify-wsapi-plugin';
+import { __dirname } from '../../system.js';
+
+const { wsRegistry, wsSchemaValidator } = wsApiPlugin;
 /**
  * @todo
  * Domain modules
@@ -62,11 +65,11 @@ const buildServer = async (): Promise<FastifyInstance> => {
   await fastify.register(autoload, {
     dir: path.join(__dirname, '/apps/server/plugins'),
   });
-  fastify.register(fastifyFormbody);
-  fastify.register(wsRegistry);
-  fastify.register(wsSchemaValidator);
-  fastify.register(fastifyWebsocket);
-  fastify.register(fastifyCors);
+  await fastify.register(fastifyFormbody);
+  await fastify.register(wsRegistry);
+  await fastify.register(wsSchemaValidator);
+  await fastify.register(fastifyWebsocket);
+  await fastify.register(fastifyCors);
   /**
    * @todo
    * Register routes
@@ -74,10 +77,10 @@ const buildServer = async (): Promise<FastifyInstance> => {
   // fastify.register(registerRoutes, {
   //   prefix: '/api',
   // });
-  // fastify.register(fastifyCookie, {
-  //   secret: 'a-secret-for-signing-cookies',
-  //   hook: 'onRequest',
-  // });
+  await fastify.register(fastifyCookie as any, {
+    secret: 'a-secret-for-signing-cookies',
+    hook: 'onRequest',
+  });
   // fastify.decorate('db', db);
   // fastify.decorate('session', session);
   // fastify.decorate('account', account);

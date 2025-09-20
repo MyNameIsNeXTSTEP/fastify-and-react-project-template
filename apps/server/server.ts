@@ -5,21 +5,13 @@ import autoload from '@fastify/autoload';
 import fastifyFormbody from '@fastify/formbody';
 import fastifyCors from '@fastify/cors';
 import fastifyWebsocket from '@fastify/websocket';
-import wsApiPlugin from 'fastify-wsapi-plugin';
+import { wsRegistry, wsSchemaValidator } from './plugins/ws-api/index.js';
 import { registerRoutes } from './routes/index.js';
-import { __dirname } from '../../system.js';
-
-const { wsRegistry, wsSchemaValidator } = wsApiPlugin;
-/**
- * @todo
- * Domain modules
- */
-// import session from '@domain/Session/index.js';
-// import account from '@domain/Account/index.js';
-import * as path from 'path';
-import fastifyCookie from '@fastify/cookie';
 import { config } from 'dotenv';
+import fastifyCookie from '@fastify/cookie';
 import { connectDB, closeDB } from './db/connection.js';
+import { __dirname } from '../../system.js';
+import * as path from 'path';
 
 config({ path: path.join(__dirname, '.env') });
 const port = Number(process.env.SERVER_PORT) || 3000;
@@ -82,13 +74,6 @@ const buildServer = async (): Promise<FastifyInstance> => {
   fastify.register(registerRoutes, {
     prefix: '/api',
   });
-  /**
-   * @todo
-   * Register routes
-   */
-  // fastify.register(registerRoutes, {
-  //   prefix: '/api',
-  // });
   await fastify.register(fastifyCookie as any, {
     secret: 'a-secret-for-signing-cookies',
     hook: 'onRequest',

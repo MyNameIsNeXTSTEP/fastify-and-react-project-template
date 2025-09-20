@@ -15,7 +15,7 @@ RUN apk add --no-cache netcat-openbsd
 COPY ../../apps/server ./apps/server
 COPY ../../shared ./shared
 ENV NODE_ENV=development
-EXPOSE 3001
+EXPOSE 3000
 CMD yarn server:dev
 
 # --- Builder Layer ---
@@ -31,5 +31,5 @@ COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/apps/server/dist ./app
 COPY --from=builder /app/shared ./shared
 ENV NODE_ENV=production
-EXPOSE 3001
+EXPOSE 3000
 CMD yarn server:start

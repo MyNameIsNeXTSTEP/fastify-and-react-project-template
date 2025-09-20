@@ -1,7 +1,7 @@
 export default {
   $id: 'auth/signup-response',
   type: 'object',
-  required: ['code', 'cookies', 'result'],
+  required: ['code', 'cookies', 'data'],
   properties: {
     code: {
       type: 'number',
@@ -39,7 +39,7 @@ export default {
         },
       },
     },
-    result: {
+    data: {
       type: 'object',
       properties: {
         accountId: {

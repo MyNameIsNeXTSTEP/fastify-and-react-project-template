@@ -17,7 +17,7 @@ declare global {
 
     interface WSResponse {
       id: number;
-      result?: Record<string, object> | string | string[] | number;
+      data?: Record<string, object> | string | string[] | number;
       cookies?: Record<string, object>;
       error?: {
         code: number;

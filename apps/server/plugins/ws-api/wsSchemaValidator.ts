@@ -16,13 +16,13 @@ const wsSchemaValidationPLugin = fp(async function (fastify: FastifyInstance): P
    */
   const schemas = fastify.getSchemas();
   for (const key in schemas) {
-    ajv.addSchema(schemas[key] as AnySchema);
+    ajv.addSchema(schemas[key as keyof typeof schemas] as AnySchema);
   }
   /**
    * Validate incoming message
    */
   // @ts-ignore
-  fastify.decorate("validateWSMessage", (message, schema) => {
+  fastify.decorate('validateWSMessage', (message: any, schema: any) => {
     const validate = ajv.compile(schema);
     const valid = validate(message);
     if (!valid) {
@@ -39,7 +39,8 @@ const wsSchemaValidationPLugin = fp(async function (fastify: FastifyInstance): P
   /**
    * Validate outcoming response
    */
-  fastify.decorate("validateWSResponse", (response, schema) => {
+  // @ts-ignore
+  fastify.decorate('validateWSResponse', (response: any, schema: any) => {
     const validate = ajv.compile(schema);
     const valid = validate(response);
     if (!valid) {

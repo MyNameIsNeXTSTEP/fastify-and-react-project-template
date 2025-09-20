@@ -9,7 +9,7 @@ const login = (fastify: FastifyInstance) =>
     const { email, password } = data.params;
     return {
       code: 200,
-      result: {
+      data: {
         email,
         password,
       },

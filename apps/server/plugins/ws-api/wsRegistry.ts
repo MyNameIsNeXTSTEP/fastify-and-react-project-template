@@ -1,20 +1,21 @@
-import type { FastifyInstance } from "fastify";
-import fp from "fastify-plugin";
+import type { FastifyInstance, FastifyRequest } from 'fastify';
+import type { WebSocket } from 'ws';
+import fp from 'fastify-plugin';
 /**
  * WS api registry as a Map of an endpoint name to its handler function
  */
 const wsRegistryPLugin = fp(async function (fastify: FastifyInstance): Promise<void> {
   const registry = new Map();
   fastify.decorate("wsRegistry", {
-    register: (method, handler, schema) => {
+    register: (method: string, handler: () => {}, schema: any) => {
       registry.set(method, { handler, schema });
     },
-    get: (method) => registry.get(method),
-    has: (method) => registry.has(method),
+    get: (method: string) => registry.get(method),
+    has: (method: string) => registry.has(method),
     /**
      * Checks if the method is available, validate the request/response, send response back.
      */
-    process: async (message, socket, request) => {
+    process: async (message: wsApi.WSMessage, socket: WebSocket, request: FastifyRequest) => {
       const { method } = message;
       const entry = registry.get(method);
       if (!entry) {

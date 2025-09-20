@@ -18,7 +18,7 @@ import {
 } from '@sequelize/core/decorators-legacy';
 
 @Table({
-  tableName: 'user_accounts',
+  tableName: 'account',
   timestamps: true,
   underscored: true,
   indexes: [
@@ -31,14 +31,14 @@ import {
     },
   ],
 })
-export class UserAccount extends Model<
-  InferAttributes<UserAccount>,
-  InferCreationAttributes<UserAccount>
+export class Account extends Model<
+  InferAttributes<Account>,
+  InferCreationAttributes<Account>
 > {
-  @Attribute(DataTypes.INTEGER)
+  @Attribute(DataTypes.BIGINT)
   @PrimaryKey
   @AutoIncrement
-  declare id: CreationOptional<number>;
+  declare id: CreationOptional<bigint>;
 
   @Attribute(DataTypes.STRING(255))
   @NotNull
@@ -71,7 +71,6 @@ export class UserAccount extends Model<
   @NotNull
   declare readonly updatedAt: CreationOptional<Date>;
 
-  // Instance methods
   public getFullName(): string {
     return `${this.firstName || ''} ${this.lastName || ''}`.trim();
   }
@@ -84,22 +83,20 @@ export class UserAccount extends Model<
     return values;
   }
 
-  // Hooks using decorators
   @BeforeCreate
-  static async beforeCreateHook(userAccount: UserAccount): Promise<void> {
+  static async beforeCreateHook(userAccount: Account): Promise<void> {
     userAccount.email = userAccount.email.toLowerCase();
   }
 
   @BeforeUpdate
-  static async beforeUpdateHook(userAccount: UserAccount): Promise<void> {
+  static async beforeUpdateHook(userAccount: Account): Promise<void> {
     if (userAccount.previous('email') !== userAccount.email) {
       userAccount.email = userAccount.email.toLowerCase();
     }
   }
 }
 
-// Type exports for compatibility
-export type UserAccountAttributes = InferAttributes<UserAccount>;
-export type UserAccountCreationAttributes = InferCreationAttributes<UserAccount>;
+export type AccountAttributes = InferAttributes<Account>;
+export type AccountCreationAttributes = InferCreationAttributes<Account>;
 
-export default UserAccount;
+export default Account;

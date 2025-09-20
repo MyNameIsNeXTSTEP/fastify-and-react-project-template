@@ -18,6 +18,7 @@
     "strictFunctionTypes": true,
     "strictPropertyInitialization": true,
     "moduleResolution": "bundler",
+    "jsx": "react-jsx",
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "isolatedModules": true,

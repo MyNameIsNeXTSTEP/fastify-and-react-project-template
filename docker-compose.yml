@@ -24,7 +24,7 @@ services:
     container_name: guss_game_db
     # restart: always
     env_file:
-      - ./apps/server/db/.env
+      - ./.env
     ports:
       - 5432:5432
     networks:

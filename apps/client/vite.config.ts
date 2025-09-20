@@ -7,15 +7,17 @@ import tailwindcss from '@tailwindcss/vite';
 import { defineConfig, loadEnv } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import path from 'path';
+// @ts-ignore
+import { __dirname } from '../../system.js';
 
 export default defineConfig(({ mode }) => {
-  console.log('Current mode:', mode);
-  const env = loadEnv(mode, process.cwd(), '');
+  console.log('Current mode:', mode, '\n');
+  const env = loadEnv(mode, __dirname, '');
   
   console.log('Loaded environment variables:', {
     VITE_WS_HOST: env.VITE_WS_HOST,
     VITE_WS_PORT: env.VITE_WS_PORT,
-  });
+  }, '\n');
 
   return {
     plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
@@ -43,7 +45,7 @@ export default defineConfig(({ mode }) => {
       host: '0.0.0.0',
       allowedHosts: ['localhost', '127.0.0.1', '0.0.0.0'],
     },
-    envDir: './apps/client',
+    envDir: './',
     envPrefix: 'VITE_',
     define: {
       'import.meta.env.VITE_WS_HOST': JSON.stringify(env.VITE_WS_HOST),

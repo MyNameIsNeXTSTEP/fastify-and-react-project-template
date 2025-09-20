@@ -9,6 +9,7 @@ import {
 
 import type { Route } from './+types/root';
 import './app.css';
+import { wsConfig } from 'config';
 
 export const links: Route.LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -29,6 +30,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet='utf-8' />
         <meta name='viewport' content='width=device-width, initial-scale=1' />
+        <script dangerouslySetInnerHTML={{
+          __html: `window.wsConfig = ${JSON.stringify(wsConfig)};`
+        }}/>
+        <script src="/scripts/apiConnection.js"></script>
+        <script src="/scripts/inspectStoreDev.js"></script>
         <Meta />
         <Links />
       </head>

@@ -3,9 +3,10 @@ import { PostgresDialect } from '@sequelize/postgres';
 import { config } from 'dotenv';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { __dirname } from '../../../system.js';
 
 const currentDirname = dirname(fileURLToPath(import.meta.url));
-config({ path: path.join(currentDirname, '.env') });
+config({ path: path.join(__dirname, '.env') });
 
 const dbConfig = {
   host: process.env.POSTGRES_HOST || 'localhost',

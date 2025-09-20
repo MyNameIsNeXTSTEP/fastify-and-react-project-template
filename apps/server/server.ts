@@ -6,6 +6,7 @@ import fastifyFormbody from '@fastify/formbody';
 import fastifyCors from '@fastify/cors';
 import fastifyWebsocket from '@fastify/websocket';
 import wsApiPlugin from 'fastify-wsapi-plugin';
+import { registerRoutes } from './routes/index.js';
 import { __dirname } from '../../system.js';
 
 const { wsRegistry, wsSchemaValidator } = wsApiPlugin;
@@ -15,7 +16,6 @@ const { wsRegistry, wsSchemaValidator } = wsApiPlugin;
  */
 // import session from '@domain/Session/index.js';
 // import account from '@domain/Account/index.js';
-// import { registerRoutes } from './routes/index.js';
 import * as path from 'path';
 import fastifyCookie from '@fastify/cookie';
 import { config } from 'dotenv';
@@ -79,6 +79,9 @@ const buildServer = async (): Promise<FastifyInstance> => {
   await fastify.register(wsSchemaValidator);
   await fastify.register(fastifyWebsocket);
   await fastify.register(fastifyCors);
+  fastify.register(registerRoutes, {
+    prefix: '/api',
+  });
   /**
    * @todo
    * Register routes

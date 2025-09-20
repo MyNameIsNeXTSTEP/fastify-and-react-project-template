@@ -20,15 +20,14 @@ export default defineConfig(({ mode }) => {
   }, '\n');
 
   return {
-    plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
-    // plugins: [
-    //   reactRouter(),
-    //   tsconfigPaths({
-    //     skip: (dir) => dir.includes('dist') || dir.includes('build'),
-    //     root: __dirname,
-    //     projects: ['./tsconfig.json'],
-    //   }),
-    // ],
+    plugins: [
+      tailwindcss(),
+      reactRouter(),
+      tsconfigPaths({
+        skip: (dir) => dir.includes('dist') || dir.includes('build'),
+        projects: ['./tsconfig.json'],
+      }),
+    ],
     resolve: {
       alias: {
         '@components': path.resolve(__dirname, 'app/components'),
@@ -68,14 +67,14 @@ export default defineConfig(({ mode }) => {
         'src',
       ],
     },
-    // build: {
-    //   sourcemap: false,
-    //   rollupOptions: {
-    //     onwarn(warning, defaultHandler) {
-    //       if (warning.code === 'SOURCEMAP_ERROR') return;
-    //       defaultHandler(warning);
-    //     },
-    //   },
-    // },
+    build: {
+      sourcemap: false,
+      rollupOptions: {
+        onwarn(warning, defaultHandler) {
+          if (warning.code === 'SOURCEMAP_ERROR') return;
+          defaultHandler(warning);
+        },
+      },
+    },
   };
 });

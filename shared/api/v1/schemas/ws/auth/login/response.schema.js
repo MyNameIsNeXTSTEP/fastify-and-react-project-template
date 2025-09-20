@@ -1,12 +1,12 @@
 export default {
   $id: "auth/login-response",
   type: "object",
-  required: ["code", "result"],
+  required: ["code", "data"],
   properties: {
     code: {
       type: "number",
     },
-    result: {
+    data: {
       type: "object",
       properties: {
         accountId: {

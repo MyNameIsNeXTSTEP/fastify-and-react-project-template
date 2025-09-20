@@ -9,7 +9,7 @@ const signup = (fastify: FastifyInstance) =>
     const { firstName, lastName, email, password, role } = data.params;
     return {
       code: 200,
-      result: {
+      data: {
         firstName,
         lastName,
         email,

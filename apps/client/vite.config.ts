@@ -20,8 +20,8 @@ export default defineConfig(({ mode }) => {
   }, '\n');
 
   return {
-    // plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
     plugins: [
+      tailwindcss(),
       reactRouter(),
       tsconfigPaths({
         skip: (dir) => dir.includes('dist') || dir.includes('build'),

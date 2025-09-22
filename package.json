@@ -1,8 +1,8 @@
 {
   "version": "1.0.0",
-  "name": "The last of Guss",
+  "name": "Fastify and ReactJS project template",
   "packageManager": "yarn@4.6.0",
-  "description": "The last of Guss",
+  "description": "Fastify and ReactJS project template",
   "main": "index.js",
   "scripts": {
     "client:dev": "yarn workspace client dev",
@@ -17,9 +17,10 @@
     "db:build": "docker compose build db",
     "db:up": "docker compose up db -d",
     "db:down": "docker compose down db",
-    "db:migrate": "npx kysely-ctl migrate",
-    "db:rollback": "npx kysely-ctl rollback",
-    "db:seed": "npx kysely-ctl seed"
+    "db:migrate:up": "yarn tsx apps/server/db/migrateOneUp.ts",
+    "db:migrate:latest": "yarn tsx apps/server/db/migrateToLatest.ts",
+    "db:rollback": "yarn tsx apps/server/db/rollbackMigration.ts",
+    "db:seed:run": "yarn tsx apps/server/db/seedsRun.ts"
   },
   "type": "module",
   "author": "Gadzhiev Islam",
@@ -31,9 +32,15 @@
   ],
   "resolutions": {
     "vite-node/vite": "^4.5.0",
-    "react-router": "7.9.1"
+    "react-router": "7.9.1",
+    "c12": "latest"
   },
   "dependencies": {
+    "dotenv": "^17.2.2",
+    "kysely": "^0.28.7",
+    "kysely-ctl": "^0.19.0",
+    "pg": "^8.16.0",
+    "tsconfck": "^3.1.6",
     "typescript": "^5.8.3"
   },
   "devDependencies": {
@@ -48,5 +55,22 @@
     "tsconfig-paths": "^4.2.0",
     "tsx": "^4.19.3",
     "typescript-eslint": "^8.32.0"
+  },
+  "dependenciesMeta": {
+    "kysely-ctl@0.19.0": {
+      "unplugged": true
+    }
+  },
+  "packageExtensions": {
+    "tsconfck@*": {
+      "peerDependencies": {
+        "typescript": "*"
+      },
+      "main": "./dist/index.js",
+      "exports": {
+        ".": "./dist/index.js",
+        "./package.json": "./package.json"
+      }
+    }
   }
 }

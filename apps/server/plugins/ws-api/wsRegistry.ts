@@ -6,7 +6,7 @@ import fp from 'fastify-plugin';
  */
 const wsRegistryPLugin = fp(async function (fastify: FastifyInstance): Promise<void> {
   const registry = new Map();
-  fastify.decorate("wsRegistry", {
+  fastify.decorate('wsRegistry', {
     register: (method: string, handler: () => {}, schema: any) => {
       registry.set(method, { handler, schema });
     },
@@ -36,7 +36,7 @@ const wsRegistryPLugin = fp(async function (fastify: FastifyInstance): Promise<v
           id: message.id,
           error: {
             code: 400,
-            message: "Invalid request parameters",
+            message: 'Invalid request parameters',
             details: validation.errors,
           },
         };
@@ -47,7 +47,7 @@ const wsRegistryPLugin = fp(async function (fastify: FastifyInstance): Promise<v
         /**
          * Early return if its the error response object
          */
-        if ("error" in result) {
+        if ('error' in result) {
           return {
             id: message.id,
             code: result.code,
@@ -60,7 +60,7 @@ const wsRegistryPLugin = fp(async function (fastify: FastifyInstance): Promise<v
         );
         if (!responseValidation.valid) {
           console.error(
-            "Response validation failed",
+            'Response validation failed',
             responseValidation.errors
           );
           return {
@@ -82,7 +82,7 @@ const wsRegistryPLugin = fp(async function (fastify: FastifyInstance): Promise<v
           id: message.id,
           error: {
             code: 500,
-            message: "Internal server error",
+            message: 'Internal server error',
           },
         };
       }

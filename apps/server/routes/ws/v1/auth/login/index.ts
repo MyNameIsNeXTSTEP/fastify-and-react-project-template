@@ -2,7 +2,7 @@
 
 import type { WebSocket } from 'ws';
 import { type FastifyRequest, type FastifyInstance } from 'fastify';
-import { type LoginBody } from '@shared/api/v1/schemas/ws/auth/login/types/loginBody';
+import type { LoginBody } from '@shared/api/v1/schemas/ws/auth/login/types';
 
 const login = (fastify: FastifyInstance) => 
   async(data: { params: LoginBody }, socket: WebSocket, request: FastifyRequest) => {

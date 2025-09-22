@@ -2,7 +2,7 @@
 
 import type { WebSocket } from 'ws';
 import type { FastifyRequest, FastifyInstance } from 'fastify';
-import { type TSignupFormBody } from '@shared/api/v1/schemas/ws/auth/signup/types/signupBody';
+import { type TSignupFormBody } from '@shared/api/v1/schemas/ws/auth/signup/types';
 
 const signup = (fastify: FastifyInstance) =>
   async (data: { params: TSignupFormBody }, socket: WebSocket, request: FastifyRequest) => {

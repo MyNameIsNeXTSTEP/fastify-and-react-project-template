@@ -33,8 +33,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <script dangerouslySetInnerHTML={{
           __html: `window.wsConfig = ${JSON.stringify(wsConfig)};`
         }}/>
-        <script src="/scripts/apiConnection.js"></script>
-        <script src="/scripts/inspectStoreDev.js"></script>
+        <script src='/scripts/apiConnection.js'></script>
+        <script src='/scripts/inspectStoreDev.js'></script>
         <Meta />
         <Links />
       </head>

@@ -9,7 +9,7 @@ export default fp(async function (fastify: FastifyInstance) {
   await fastify.register(swagger, {
     openapi: {
       info: {
-        title: 'The last of Guss OpenAPI Documentation',
+        title: 'OpenAPI Documentation',
         version: '3.0.1',
       },
       servers: [

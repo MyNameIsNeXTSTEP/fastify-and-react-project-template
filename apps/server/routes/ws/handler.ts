@@ -52,7 +52,7 @@ const wsEntryPointHandler = (fastify: FastifyInstance) => (socket: WebSocket, re
     if (data.type === 'call') {
       /**
        * @todo @important
-       * Need to use type "chat" for chat methods and process it separately
+       * Need to use type 'chat' for chat methods and process it separately
        */
       const method = data.method;
       logInfo(`WebSocket API call: ${method}`);

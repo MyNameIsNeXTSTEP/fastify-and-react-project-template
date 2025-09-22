@@ -20,9 +20,9 @@ async function rollbackLastMigration() {
   console.log(results);
   for (const result of results) {
     if (result.status === 'Success') {
-      console.log(`Migration ${result.migrationName} applied successfully`);
+      console.log(`Migration ${result.migrationName} rolled back successfully`);
     } else {
-      console.log(`Migration ${result.migrationName} failed`);
+      console.log(`Rolling back a migration ${result.migrationName} failed`);
     }
   }
   await db.destroy();

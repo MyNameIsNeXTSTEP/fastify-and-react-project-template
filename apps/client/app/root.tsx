@@ -10,6 +10,7 @@ import {
 import type { Route } from './+types/root';
 import './app.css';
 import { wsConfig } from 'config';
+import { MantineProvider } from '@mantine/core';
 
 export const links: Route.LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -39,9 +40,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        {children}
-        <ScrollRestoration />
-        <Scripts />
+        <MantineProvider defaultColorScheme={'light'}>
+          {children}
+          <ScrollRestoration/>
+          <Scripts />
+        </MantineProvider>
       </body>
     </html>
   );

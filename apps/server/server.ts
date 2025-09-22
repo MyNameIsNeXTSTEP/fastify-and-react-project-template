@@ -9,13 +9,19 @@ import { wsRegistry, wsSchemaValidator } from './plugins/ws-api/index.js';
 import { registerRoutes } from './routes/index.js';
 import { config } from 'dotenv';
 import fastifyCookie from '@fastify/cookie';
-import { connectDB, closeDB } from './db/connection.js';
 import { __dirname } from '../../system.js';
 import * as path from 'path';
 
 config({ path: path.join(__dirname, '.env') });
 const port = Number(process.env.SERVER_PORT) || 3000;
 
+/**
+ * @todo
+ * Connect db with Fasrify decorators:
+ * ```js
+ * fastify.decorate('db', db);
+ * ```
+ */
 const buildServer = async (): Promise<FastifyInstance> => {
   const fastify = Fastify({
     logger: {
@@ -40,7 +46,6 @@ const buildServer = async (): Promise<FastifyInstance> => {
   });
 
   try {
-    await connectDB();
     fastify.log.info('Server: Database connected successfully');
   } catch (error: any) {
     fastify.log.error('Server: Failed to connect to database:', error);
@@ -93,13 +98,11 @@ const startServer = async () => {
     });
     process.on('SIGINT', async () => {
       console.warn('\nClosing the server by a SIGINT\n');
-      await closeDB();
       await server.close();
       process.exit(0);
     });
     process.on('SIGTERM', async () => {
       console.warn('\nClosing the server by a SIGTERM\n');
-      await closeDB();
       await server.close();
       process.exit(1);
     });
